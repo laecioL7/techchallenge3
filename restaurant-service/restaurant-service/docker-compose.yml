@@ -1,0 +1,24 @@
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongo_spring
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    volumes:
+      - mongo_data:/data/db
+
+  springboot-app:
+    image: ms-restaurante-service  # Substitua pelo nome da sua imagem do Spring Boot
+    container_name: ms-restaurante-service
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_DATA_MONGODB_URI: mongodb://root:example@mongo_spring:27017/restaurant-service?authSource=admin
+    depends_on:
+      - mongodb
+
+volumes:
+  mongo_data:
