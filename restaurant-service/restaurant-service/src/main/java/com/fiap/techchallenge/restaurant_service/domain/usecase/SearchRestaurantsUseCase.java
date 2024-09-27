@@ -16,7 +16,7 @@ public class SearchRestaurantsUseCase {
     }
 
     public List<Restaurant> searchRestaurantsByLocationAndCuisineType(String location, String cuisineType) {
-        List<Restaurant> restaurantList = restaurantRepository.findByLocationAndCuisineType(location, cuisineType);
+        List<Restaurant> restaurantList = restaurantRepository.findByLocationAndCuisineTypeDesc(location, cuisineType);
 
         //se for vazio retornar exception
         if(restaurantList.isEmpty()){

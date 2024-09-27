@@ -42,7 +42,7 @@ class SearchRestaurantsUseCaseTest {
     void testSearchRestaurantsByLocationAndCuisineTypeSuccess() {
         // Arrange
         Restaurant restaurant = new Restaurant();
-        when(restaurantRepository.findByLocationAndCuisineType( "location", "cuisineType"))
+        when(restaurantRepository.findByLocationAndCuisineTypeDesc( "location", "cuisineType"))
                 .thenReturn(List.of(restaurant));
 
         // Act
@@ -56,7 +56,7 @@ class SearchRestaurantsUseCaseTest {
     @Test
     void testSearchRestaurantsByLocationAndCuisineTypeNoResults() {
         // Arrange
-        when(restaurantRepository.findByLocationAndCuisineType( "location", "cuisineType"))
+        when(restaurantRepository.findByLocationAndCuisineTypeDesc( "location", "cuisineType"))
                 .thenReturn(Collections.emptyList());
 
         // Act

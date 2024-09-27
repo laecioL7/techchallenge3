@@ -9,7 +9,7 @@ public interface RestaurantRepository {
     Restaurant save(Restaurant restaurant);
     Optional<Restaurant> findById(String id);
     List<Restaurant> findAll();
-    List<Restaurant> findByLocationAndCuisineType(String location, String cuisineType);
+    List<Restaurant> findByLocationAndCuisineTypeDesc(String location, String cuisineType);
     long count();
     void deleteById(String id);
     void deleteByNameContaining(String name);

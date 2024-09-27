@@ -10,12 +10,13 @@ import java.util.List;
 
 @Repository
 public interface MongoDBRestaurantRepository extends MongoRepository<Restaurant, String>, RestaurantRepository {
-    @Override
-    List<Restaurant> findByLocationAndCuisineType(String location, String cuisineType);
 
-    @Query(value = "{ 'name': { $regex: ?0, $options: 'i' } }", delete = true)
+    @Query(value = "{ 'location': { $regex: ?0, $options: 'i' }, 'cuisineType': { $regex: ?1, $options: 'i' } }")
+    List<Restaurant> findByLocationAndCuisineTypeDesc(String location, String cuisineType);
+
+    @Query(value = "{ 'name': { $regex: ?0, $options: 'i' } }")
     void deleteByNameContaining(String name);
 
-    @Query(value = "{ 'name': { $regex: ?0, $options: 'i' } }", delete = true)
+    @Query(value = "{ 'name': { $regex: ?0, $options: 'i' } }")
     List<Restaurant> findByNameContaining(String name);
 }

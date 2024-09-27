@@ -33,22 +33,21 @@ public class RestaurantController {
         return ResponseEntity.ok(registerRestaurantUseCase.registerRestaurant(entity));
     }
 
-    @GetMapping
-    public ResponseEntity<List<Restaurant>> searchRestaurants(@RequestParam(required = false) String location,
-                                                              @RequestParam(required = false) String cuisineType) {
-        List<Restaurant> restaurants = null;
+    @GetMapping("/search")
+    public ResponseEntity<List<Restaurant>> searchRestaurants(@RequestParam(required = true) String location,
+                                                              @RequestParam(required = true) String cuisineType) {
+        List<Restaurant> restaurants = searchRestaurantsUseCase.searchRestaurantsByLocationAndCuisineType(location, cuisineType);
+        return ResponseEntity.ok(restaurants);
+    }
 
-        if(location != null && cuisineType != null){
-            restaurants = searchRestaurantsUseCase.searchRestaurantsByLocationAndCuisineType(location, cuisineType);
-        }else{
-            restaurants = searchRestaurantsUseCase.searchRestaurants();
-        }
-
+    @GetMapping("/search-all")
+    public ResponseEntity<List<Restaurant>> searchAllRestaurants() {
+        List<Restaurant> restaurants = searchRestaurantsUseCase.searchRestaurants();
         return ResponseEntity.ok(restaurants);
     }
 
     @GetMapping("/search-by-name")
-    public ResponseEntity<List<Restaurant>> searchRestaurantsByName(@RequestParam(required = false) String name) {
+    public ResponseEntity<List<Restaurant>> searchRestaurantsByName(@RequestParam(required = true) String name) {
         List<Restaurant> restaurants = searchRestaurantsUseCase.searchRestaurantsByName(name);
         return ResponseEntity.ok(restaurants);
     }
